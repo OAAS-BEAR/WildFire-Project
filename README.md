@@ -25,9 +25,11 @@ For testing Unet model which takes fuel density as input:
 ```python test_unet.py ```
 
 For training Unet model which takes both fuel density and wind information as input:
+
 ```python train_unet_wind.py ```
 
 For tesing Unet model which takes both fuel density and wind information as input:
+
 ```python test_unet_wind.py ```
 
 The other model can be trained in the same way,
