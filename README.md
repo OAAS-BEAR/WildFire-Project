@@ -4,6 +4,7 @@
 
 
 1. data/:
+
   i. You probably need to first run pre_process.py to pre_process the data.
   
   ii. dataset.py -  1 second idealized grassland dataset only for the fuel density
