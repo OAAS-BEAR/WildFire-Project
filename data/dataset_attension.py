@@ -24,9 +24,9 @@ class IdealizedGrasslands(data.Dataset):
         self.output_length = output_length
         self.direc = direc
         self.list_IDs = indices
-       # self.c = bp3d.Client(url='https://burnpro3d.sdsc.edu/api')
-       # self.ens = c.load_ensemble('uniform-pgml-success.bp3d.json')
-       # self.out = ens.output()
+        self.c = bp3d.Client(url='https://burnpro3d.sdsc.edu/api')
+        self.ens = c.load_ensemble('uniform-pgml-success.bp3d.json')
+        self.out = ens.output()
     def __len__(self):
         return len(self.list_IDs)
 

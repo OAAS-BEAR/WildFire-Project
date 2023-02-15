@@ -28,20 +28,20 @@ train_direc="/root/autodl-tmp/data/"
 test_direc="/root/autodl-tmp/data/"
 
 min_mse=10
-output_length=100
-input_length=10
+output_length=40
+input_length=8
 learning_rate=0.001
 dropout_rate=0
 kernel_size=3
 batch_size=1
 
-train_indices=list(range(0,500))
-valid_indices = list(range(550, 600))
-test_indices = list(range(600, 650))
+train_indices=list(range(0,800))
+valid_indices = list(range(800, 900))
+test_indices = list(range(900, 1000))
 convcell =  ConvLSTM(input_shape=(75,75), input_dim=64, hidden_dims=[128,128,64], n_layers=3, kernel_size=(3,3), device=device)
 model= EncoderRNN(convcell,device=device).to(device)
-train_set = IdealizedGrasslands(train_indices, input_length , 15, output_length, train_direc)
-valid_set = IdealizedGrasslands(valid_indices, input_length , 15, output_length, test_direc)
+train_set = IdealizedGrasslands(train_indices, input_length , 10, output_length, train_direc)
+valid_set = IdealizedGrasslands(valid_indices, input_length , 10, output_length, test_direc)
 train_loader = data.DataLoader(train_set, batch_size = batch_size, shuffle = True, num_workers = 8)
 valid_loader = data.DataLoader(valid_set, batch_size = batch_size, shuffle = False, num_workers = 8)
 loss_fun = torch.nn.L1Loss()
@@ -67,7 +67,7 @@ for i in range(50):
     if valid_mse[-1] < min_mse:
         min_mse = valid_mse[-1]
         best_model = model
-        torch.save(best_model, "convlstm_model_single4.pth")
+        torch.save(best_model, "convlstm_model_single5.pth")
     end = time.time()
     if (len(train_mse) > 50 and np.mean(valid_mse[-5:]) >= np.mean(valid_mse[-10:-5])):
             break

@@ -24,22 +24,22 @@ train_direc="/root/autodl-tmp/data/"
 test_direc="/root/autodl-tmp/data/"
 
 min_mse=10
-output_length=200
-input_length=10
+output_length=40
+input_length=8
 learning_rate=0.001
 dropout_rate=0
 kernel_size=3
 batch_size=1
 
 
-train_indices=list(range(0,500))
-valid_indices = list(range(550, 600))
-test_indices = list(range(600, 650))
+train_indices=list(range(0,800))
+valid_indices = list(range(800, 900))
+test_indices = list(range(900, 1000))
 loss_fun = torch.nn.L1Loss()
 #loss_local=localLoss()
 #DL=decreaseLoss()
-best_model = torch.load("convlstm_model_single4.pth")
-test_set = IdealizedGrasslands(test_indices, input_length , 15, output_length, test_direc)
+best_model = torch.load("convlstm_model_single5.pth")
+test_set = IdealizedGrasslands(test_indices, input_length , 10, output_length, test_direc)
 test_loader = data.DataLoader(test_set, batch_size = batch_size, shuffle = False, num_workers = 8)
 preds, trues,loss_curve = test_epoch(test_loader, best_model, loss_fun)
 print(preds.shape)
@@ -49,4 +49,4 @@ print(trues.shape)
 torch.save({"preds": preds[:20],
             "trues": trues[:20],
             "loss_curve": loss_curve},
-            "/root/autodl-tmp/convlstm_results_single4.pt")
+            "/root/autodl-tmp/convlstm_results_single5.pt")
