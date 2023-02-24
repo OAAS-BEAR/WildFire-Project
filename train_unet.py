@@ -10,6 +10,7 @@ from torch.utils import data
 import itertools
 import re
 import random
+import datetime
 import time
 from models.unets import U_net
 from torch.autograd import Variable
@@ -20,8 +21,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 import warnings
 warnings.filterwarnings("ignore")
 
-train_direc="/root/autodl-tmp/data/"
-test_direc="/root/autodl-tmp/data/"
+train_direc="/data/train/"
+test_direc="/data/test/"
 min_mse=10
 output_length=100
 input_length=14
@@ -50,6 +51,8 @@ valid_mse = []
 test_mse = []
 for i in range(50):
     start = time.time()
+    print('start:',datetime.datetime.now())
+    print('Training epoch:',i)
     torch.cuda.empty_cache()
     scheduler.step()
     model.train()
@@ -61,11 +64,10 @@ for i in range(50):
     if valid_mse[-1] < min_mse:
         min_mse = valid_mse[-1]
         best_model = model
-        torch.save(best_model, "unet_model.pth")
+        print('best model of epoch:', i)
+        torch.save(best_model, f"unet_model_epoch__{i}.pth")
     end = time.time()
+    print('end:',datetime.datetime.now())
     if (len(train_mse) > 50 and np.mean(valid_mse[-5:]) >= np.mean(valid_mse[-10:-5])):
             break
     print(train_mse[-1], valid_mse[-1], round((end-start)/60,5))
-
-
-
