@@ -29,7 +29,7 @@ logging.basicConfig(filename=f'testing_{datetime.datetime.now().strftime("%Y_%m_
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                     datefmt='%H:%M:%S',
-                    level=logging.DEBUG)
+                    level=logging.INFO)
 
 train_direc = "/data/train/"
 test_direc = "/data/test/"
