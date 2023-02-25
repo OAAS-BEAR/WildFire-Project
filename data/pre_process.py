@@ -4,7 +4,7 @@ sys.path.append('../..')
 import bp3d
 import numpy as np
 from PIL import Image
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import torch
 
 c = bp3d.Client(url='https://burnpro3d.sdsc.edu/api')
